@@ -3,6 +3,8 @@ import {Profile} from './profile.entity'
 import {Post} from "../../posts/entities/post.entity";
 import * as bcrypt from 'bcrypt';
 import {Exclude} from "class-transformer";
+import { Event } from 'src/events/entities/events.entity';
+
 
 @Entity({
   name: 'users',
@@ -31,9 +33,11 @@ export class User {
   @OneToMany(() => Post, (post) => post.user)
   posts: Post[];
 
+  @OneToMany(() => Event, (events) => events.user)
+  events: Event[];
+
   @BeforeInsert()
   async hashPassword() {
-    // Implement password hashing logic here, e.g., using bcrypt
     this.password = await bcrypt.hash(this.password, 10);
   }
 }
