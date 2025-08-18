@@ -7,6 +7,10 @@ import {Env} from "./env.model";
 import { PostsModule } from './posts/posts.module';
 import { AuthModule } from './auth/auth.module';
 import { EventsModule } from './events/events.module';
+import { ChatModule } from './chat/chat.module';
+import { ConversationService } from './chat/services/conversation.service';
+import { MessageService } from './chat/services/message.service';
+import { MessageController } from './chat/controllers/message.controller';
 
 @Module({
   imports: [
@@ -30,7 +34,10 @@ import { EventsModule } from './events/events.module';
     PostsModule,
     AuthModule,
     EventsModule,
+    ChatModule,
   ],
+  providers: [ConversationService, MessageService],
+  controllers: [MessageController],
 })
 export class AppModule {
 }
