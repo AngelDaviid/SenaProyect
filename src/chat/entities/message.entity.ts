@@ -2,7 +2,7 @@ import {Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn} fro
 import {User} from '../../users/entities/user.entity';
 import {Conversation} from './conversations.entity';
 
-@Entity('message')
+@Entity()
 export class Message {
   @PrimaryGeneratedColumn()
   id: number;
