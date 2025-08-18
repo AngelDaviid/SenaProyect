@@ -3,7 +3,7 @@ import {Profile} from './profile.entity'
 import {Post} from "../../posts/entities/post.entity";
 import * as bcrypt from 'bcrypt';
 import {Exclude} from "class-transformer";
-import { Event } from 'src/events/entities/events.entity';
+import { Event } from '../../events/entities/events.entity'
 import {Conversation} from "../../chat/entities/conversations.entity";
 import {Message} from "../../chat/entities/message.entity";
 

@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, ManyToMany, JoinTable, OneToMany } from
 import { User } from '../../users/entities/user.entity';
 import { Message } from './message.entity';
 
-@Entity()
+@Entity('conversation')
 export class Conversation {
   @PrimaryGeneratedColumn()
   id: number;
