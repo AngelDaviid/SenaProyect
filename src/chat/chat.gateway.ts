@@ -33,8 +33,8 @@ export class ChatGateway {
     @MessageBody() data: { conversationId: string; senderId: string; text: string },
   ) {
     const message = await this.messagesService.create(
-      data.conversationId,
-      data.senderId,
+      +data.conversationId,
+      +data.senderId,
       data.text,
     );
 

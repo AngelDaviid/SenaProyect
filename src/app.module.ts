@@ -8,9 +8,9 @@ import { PostsModule } from './posts/posts.module';
 import { AuthModule } from './auth/auth.module';
 import { EventsModule } from './events/events.module';
 import { ChatModule } from './chat/chat.module';
-import { ConversationService } from './chat/services/conversation.service';
-import { MessageService } from './chat/services/message.service';
-import { MessageController } from './chat/controllers/message.controller';
+import { ConversationsService } from './chat/services/conversation.service';
+import { MessagesService } from './chat/services/message.service';
+import { MessagesController } from './chat/controllers/message.controller';
 
 @Module({
   imports: [
@@ -36,8 +36,8 @@ import { MessageController } from './chat/controllers/message.controller';
     EventsModule,
     ChatModule,
   ],
-  providers: [ConversationService, MessageService],
-  controllers: [MessageController],
+  providers: [],
+  controllers: [MessagesController],
 })
 export class AppModule {
 }
