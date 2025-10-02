@@ -8,8 +8,6 @@ import { PostsModule } from './posts/posts.module';
 import { AuthModule } from './auth/auth.module';
 import { EventsModule } from './events/events.module';
 import { ChatModule } from './chat/chat.module';
-import { ConversationsService } from './chat/services/conversation.service';
-import { MessagesService } from './chat/services/message.service';
 import { MessagesController } from './chat/controllers/message.controller';
 
 @Module({
