@@ -16,7 +16,7 @@ import {Env} from "../env.model";
       inject: [ConfigService],
       useFactory: (configService: ConfigService<Env>) => ({
         secret: configService.get('JWT_SECRET', { infer: true}),
-        singOptions: { expiresIn: '6d'}
+        signOptions: { expiresIn: '6d'}
       })
     })
   ],

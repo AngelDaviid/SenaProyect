@@ -3,6 +3,7 @@ import {ClassSerializerInterceptor, ValidationPipe} from '@nestjs/common';
 import {AppModule} from './app.module';
 import {DocumentBuilder, SwaggerModule} from "@nestjs/swagger";
 import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -28,9 +29,13 @@ async function bootstrap() {
 
   app.use(helmet());
   app.enableCors({
-    origin: '*',
-
+    origin: process.env.FRONTEND_URL || '*',
   });
+
+  app.use(rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 100,
+  }));
 
   await app.listen(process.env.PORT ?? 3001);
 }

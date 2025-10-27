@@ -43,6 +43,14 @@ export class UsersService {
     return user.posts;
   }
 
+  async findByIdForAuth(id: number) {
+    const user = await this.usersRepository.findOne({
+      where: { id },
+      relations: ['profile'],
+    });
+    return user;
+  }
+
 
   async create(create: CreateUserDto) {
     try {
