@@ -22,6 +22,9 @@ export class User {
   @Column({type: 'varchar', length: 255})
   password: string;
 
+  @Column({ type: 'enum', enum: ['desarrollador', 'instructor', 'aprendiz'], default: 'aprendiz' })
+  role: 'desarrollador' | 'instructor' | 'aprendiz';
+
   @CreateDateColumn({type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP', name: 'created_at'})
   createdAt: Date;
 
