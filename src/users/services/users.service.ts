@@ -46,7 +46,11 @@ export class UsersService {
 
   async create(create: CreateUserDto) {
     try {
-      const newUser = this.usersRepository.create(create);
+      const data = {
+        ...create,
+        role: create.role ?? 'aprendiz'
+      };
+      const newUser = this.usersRepository.create(data as Partial<User>);
       const savedUser = await this.usersRepository.save(newUser);
       return this.findOne(savedUser.id)
     } catch (error) {
