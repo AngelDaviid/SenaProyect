@@ -13,7 +13,6 @@ export class AuthService {
 
   async validateUser(email: string, pass: string) {
     const user = await this.usersService.getUserbyEmail(email);
-    console.log(user);
     if (!user) {
       throw new UnauthorizedException('User not found');
     }
@@ -24,11 +23,9 @@ export class AuthService {
     return user;
   }
 
-  generateToken(user: User) {
-    const payload: Payload = {sub: user.id, role: user.role};
-    return {
-      access_token: this.jwtService.sign(payload),
-    };
+  generateToken(user: User): string {
+    const payload: Payload = { sub: user.id, role: user.role };
+    return this.jwtService.sign(payload);
   }
 
 }
