@@ -18,7 +18,6 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { v4 as uuidv4 } from 'uuid';
-
 import { EventsService } from '../services/events.service';
 import { CreateEventDto, UpdateEventDto } from '../dto/events.dto';
 import { Event } from '../entities/events.entity';
@@ -49,10 +48,11 @@ export class EventsController {
     limits: { fileSize: 8 * 1024 * 1024 },
   }))
   create(@Body() createEventDto: CreateEventDto, @Req() req: Request, @UploadedFile() file?: Express.Multer.File) {
-    const payload = req.user as Payload;
-    const userId = payload.sub;
+    const user = req.user as any;
+    const userId = user.id;
+
     const ImageUrl = file ? `/uploads/${file.filename}` : createEventDto.imageUrl;
-    return this.eventsService.create(createEventDto, userId);
+    return this.eventsService.create(createEventDto, userId, ImageUrl);
   }
 
   @ApiResponse({ status: 201, description: 'Eventos obtenidos correctamente.' })

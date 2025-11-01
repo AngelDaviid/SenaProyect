@@ -1,4 +1,4 @@
-import {Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
 import {User} from "../../users/entities/user.entity";
 import {Category} from "../../posts/entities/category.entity";
 
@@ -16,8 +16,8 @@ export class Event {
   @Column({type: 'text'})
   description: string;
 
-  @Column({ nullable: true })
-  imageUrl?: string;
+  @Column({ type: 'varchar', length: 500, nullable: true })
+  imageUrl?: string | null;
 
   @Column({type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP', name: 'created_at'})
   createdAt: Date;

@@ -16,9 +16,10 @@ export class Message {
   @Column()
   text: string;
 
-  @Column({ nullable: true})
+  @Column({ nullable: true })
   imageUrl?: string;
 
   @CreateDateColumn()
   createdAt: Date;
 }
+

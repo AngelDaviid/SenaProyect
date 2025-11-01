@@ -13,7 +13,7 @@ export class PostsService {
   ) {
   }
 
-  async create(createPostDto: CreatePostDto, userId: number, imgeUrl?: string) {
+  async create(createPostDto: CreatePostDto, userId: number, imageUrl?: string) {
     try {
       const newPost = await this.postsRepository.save({
         ...createPostDto,

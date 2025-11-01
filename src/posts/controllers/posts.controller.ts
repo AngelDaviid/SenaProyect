@@ -49,8 +49,8 @@ export class PostsController {
     limits: { fileSize: 5 * 1024 * 1024 },
   }))
   create(@Body() createPostDto: CreatePostDto, @Req() req: Request, @UploadedFile() file?: Express.Multer.File) {
-    const payload = req.user as Payload;
-    const userId = payload.sub;
+    const user = req.user as any;
+    const userId = user.id;
     const imageUrl = file ? `/uploads/${file.filename}` : createPostDto.imageUrl;
     return this.postsService.create(createPostDto, userId, imageUrl);
   }

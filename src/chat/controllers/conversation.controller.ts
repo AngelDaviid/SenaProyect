@@ -1,4 +1,4 @@
-import { Controller, Post, Get, Param, Body, Put, Delete } from '@nestjs/common';
+import { Controller, Post, Get, Param, Body, Put, Delete, ParseIntPipe } from '@nestjs/common';
 import { ConversationsService } from '../services/conversation.service';
 import { CreateConversationDto } from '../dtos/create-conversation.dto';
 import { UpdateConversationDto } from '../dtos/update-conversation.dto';
@@ -18,17 +18,17 @@ export class ConversationController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: number) {
+  async findOne(@Param('id', ParseIntPipe) id: number) {
     return this.conversationService.findOne(id);
   }
 
   @Put(':id')
-  async update(@Param('id') id: number, @Body() dto: UpdateConversationDto) {
+  async update(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateConversationDto) {
     return this.conversationService.update(id, dto);
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: number) {
+  async remove(@Param('id', ParseIntPipe) id: number) {
     return this.conversationService.delete(id);
   }
 }

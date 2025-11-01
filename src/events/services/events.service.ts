@@ -15,17 +15,26 @@ export class EventsService {
 
   async create(createEventDto: CreateEventDto, userId: number, imageUrl?: string) {
     try {
-      const newEvent = await this.eventsRepository.save({
-        ...createEventDto,
-        user: {id: userId},
-        category: {id: createEventDto.categoryId},
-        imageUrl: imageUrl,
-      });
+      const payload: any = { ...createEventDto };
+      delete payload.id;
+      const toSave: any = {
+        ...payload,
+        user: { id: userId },
+        imageUrl: imageUrl ?? payload.imageUrl,
+      };
+      if (payload.categoryId != null) {
+        toSave.category = { id: payload.categoryId };
+      }
+      console.log('🧠 userId recibido:', userId);
+      console.log('🧩 toSave:', toSave);
+      const newEvent = await this.eventsRepository.save(toSave);
       return this.findOne(newEvent.id);
     } catch (error) {
       throw new BadRequestException('Error al crear el evento. Verifica los datos proporcionados.');
     }
   }
+
+
 
   async findAll() {
     return await this.eventsRepository.find({

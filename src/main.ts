@@ -2,11 +2,14 @@ import {NestFactory, Reflector} from '@nestjs/core';
 import {ClassSerializerInterceptor, ValidationPipe} from '@nestjs/common';
 import {AppModule} from './app.module';
 import {DocumentBuilder, SwaggerModule} from "@nestjs/swagger";
+import { join } from 'path';
+import { NestExpressApplication } from '@nestjs/platform-express';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  app.useStaticAssets(join(__dirname, '..', 'public'));
   app.useGlobalPipes(new ValidationPipe({
     transform: true,
     whitelist: true,
